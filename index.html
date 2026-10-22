@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#05060d">
 <title>Pharma Nova Pro — المكتبة والبطاقات والاختبارات</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -25,6 +25,7 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
+html,body{overflow-x:hidden;max-width:100vw}
 body{
   margin:0;
   background:
@@ -32,7 +33,7 @@ body{
     radial-gradient(circle at 12% 14%,rgba(255,62,165,.09),transparent 22%),
     var(--bg);
   color:var(--text);font-family:var(--font-ar);
-  min-width:320px;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  min-width:320px;-webkit-font-smoothing:antialiased;
 }
 body:before{
   content:"";position:fixed;inset:-20%;pointer-events:none;
@@ -46,8 +47,10 @@ body:before{
 @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
 @keyframes correctPulse{0%{transform:scale(1)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
 @keyframes slideUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes libSpin{to{transform:rotate(360deg)}}
 ::selection{background:rgba(0,210,255,.28)}
-button,input,select,textarea{font:inherit;font-family:inherit}
+button,input,select,textarea{font:inherit;font-family:inherit;max-width:100%}
+img{max-width:100%}
 button{border:0;cursor:pointer;color:#fff}
 button:disabled{cursor:not-allowed;opacity:.45}
 .hidden{display:none!important}
@@ -56,8 +59,6 @@ button:disabled{cursor:not-allowed;opacity:.45}
 
 /* ============ LAYOUT ============ */
 .app{display:grid;grid-template-columns:var(--sidebar-width) 1fr;min-height:100vh}
-
-/* ============ SIDEBAR ============ */
 .sidebar{
   position:sticky;top:0;height:100vh;padding:24px 16px;
   border-left:1px solid var(--line);background:rgba(7,9,18,.72);
@@ -109,13 +110,11 @@ button:disabled{cursor:not-allowed;opacity:.45}
 .side-footer{margin-top:auto;padding-top:16px;font-size:10.5px;color:var(--muted);line-height:1.9}
 .side-footer .kbd{margin:0 2px}
 
-/* ============ MAIN ============ */
 .main{padding:24px 36px 140px;max-width:1600px;width:100%;margin:auto}
 .topbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:24px;flex-wrap:wrap}
 .crumb{color:#7f8ca7;font-size:12px;letter-spacing:.06em;font-family:var(--font-en)}
 .top-actions{display:flex;gap:10px;flex-wrap:wrap}
 
-/* ============ BUTTONS ============ */
 .iconbtn,.ghost,.primary,.danger{
   min-height:42px;padding:10px 16px;border-radius:13px;
   transition:.22s var(--ease);display:inline-flex;align-items:center;gap:8px;
@@ -135,7 +134,6 @@ button:disabled{cursor:not-allowed;opacity:.45}
 .danger{background:rgba(255,85,119,.12);border:1px solid rgba(255,85,119,.24);color:#ff8ba0}
 .danger:hover{background:rgba(255,85,119,.18);transform:translateY(-2px)}
 
-/* ============ HERO ============ */
 .hero{position:relative;overflow:hidden;margin-bottom:28px}
 .hero-main{
   position:relative;border:1px solid var(--line);border-radius:var(--radius-lg);
@@ -150,7 +148,7 @@ button:disabled{cursor:not-allowed;opacity:.45}
   filter:blur(12px);animation:pulse 6s ease-in-out infinite;
 }
 .eyebrow{font-size:11px;letter-spacing:.2em;color:#8aa2c8;text-transform:uppercase;font-weight:600;font-family:var(--font-en)}
-.hero h2{font-size:38px;line-height:1.08;margin:14px 0 14px;letter-spacing:-.04em;font-weight:900}
+.hero h2{font-size:clamp(22px, 4vw, 38px);line-height:1.08;margin:14px 0 14px;letter-spacing:-.04em;font-weight:900}
 .hero h2 .gradient{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero p{max-width:720px;color:#aab5cd;font-size:14.5px;line-height:1.85;margin:0}
 .hero-search{position:relative;margin-top:26px;max-width:760px}
@@ -164,17 +162,14 @@ button:disabled{cursor:not-allowed;opacity:.45}
 .hero-search input:focus{
   border-color:rgba(0,210,255,.6);
   box-shadow:0 0 0 4px rgba(0,210,255,.08),0 0 40px rgba(0,210,255,.1);
-  background:rgba(0,0,0,.35);
 }
 .hero-search .searchicon{position:absolute;left:16px;top:50%;transform:translateY(-50%);opacity:.6;font-size:17px;pointer-events:none}
 
-/* ============ SECTIONS ============ */
 .section{margin-top:28px}
 .section-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px}
 .section-head h3{margin:0;font-size:18px;font-weight:800}
 .section-head p{margin:5px 0 0;color:var(--muted);font-size:12.5px}
 
-/* ============ CATEGORY STRIP ============ */
 .cats-wrap{display:flex;flex-wrap:wrap;gap:10px}
 .cat-chip{
   display:inline-flex;align-items:center;gap:8px;
@@ -182,12 +177,8 @@ button:disabled{cursor:not-allowed;opacity:.45}
   border:1px solid var(--line);background:rgba(255,255,255,.035);
   transition:.22s var(--ease);
 }
-.cat-chip:hover{
-  border-color:rgba(0,210,255,.4);background:rgba(0,210,255,.05);
-  transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,210,255,.1);
-}
+.cat-chip:hover{border-color:rgba(0,210,255,.4);background:rgba(0,210,255,.05);transform:translateY(-2px)}
 .cat-name{font-size:13px;font-weight:700;cursor:pointer;padding:2px 4px;border-radius:6px}
-.cat-name:hover{color:#99eaff}
 .cat-count{
   font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:999px;
   background:rgba(0,210,255,.12);color:#99eaff;border:1px solid rgba(0,210,255,.18);
@@ -202,7 +193,6 @@ button:disabled{cursor:not-allowed;opacity:.45}
 .cat-btn:hover{background:rgba(0,210,255,.15);color:#fff;transform:scale(1.08)}
 .cat-btn.danger-mini:hover{background:rgba(255,85,119,.22);color:#ff8899}
 
-/* ============ TOOLBAR ============ */
 .toolbar{display:flex;gap:10px;align-items:center;margin-bottom:18px;flex-wrap:wrap}
 .field{flex:1;position:relative;min-width:220px}
 .field input,.field select,.field textarea{
@@ -211,11 +201,8 @@ button:disabled{cursor:not-allowed;opacity:.45}
   padding:12px 15px;outline:none;transition:.22s var(--ease);font-size:13.5px;
 }
 .field input::placeholder{color:#6d7a94}
-.field select option{background:#0b0f1b;color:#fff}
 .field input:focus,.field select:focus,.field textarea:focus{
-  border-color:rgba(0,210,255,.55);
-  box-shadow:0 0 0 4px rgba(0,210,255,.07);
-  background:rgba(255,255,255,.05);
+  border-color:rgba(0,210,255,.55);box-shadow:0 0 0 4px rgba(0,210,255,.07);
 }
 select{
   -webkit-appearance:none;-moz-appearance:none;appearance:none;
@@ -225,26 +212,21 @@ select{
   background-position:left 14px center !important;
   padding-left:38px !important;
 }
-select option{background:#0b0f1b;color:#fff}
 
-/* ============ DRUG CARDS ============ */
 .drugs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .drug-card{
   position:relative;padding:18px;border-radius:var(--radius);
   border:1px solid var(--line);
   background:linear-gradient(145deg,rgba(20,25,45,.75),rgba(7,10,20,.75));
   overflow:hidden;cursor:pointer;transition:.24s var(--ease);
+  content-visibility:auto;contain-intrinsic-size:0 180px;
 }
 .drug-card:after{
   content:"";position:absolute;inset:-35%;
   background:radial-gradient(circle at 50% 50%,var(--glow,rgba(0,210,255,.22)),transparent 45%);
   filter:blur(30px);opacity:.18;transition:.2s;pointer-events:none;
 }
-.drug-card:hover{
-  transform:translateY(-6px);border-color:rgba(0,210,255,.42);
-  box-shadow:0 26px 60px rgba(0,0,0,.48),0 0 42px rgba(0,210,255,.08);
-}
-.drug-card:hover:after{opacity:.5}
+.drug-card:hover{transform:translateY(-6px);border-color:rgba(0,210,255,.42);box-shadow:0 26px 60px rgba(0,0,0,.48)}
 .drug-card .line{position:absolute;left:0;right:0;top:0;height:2px;background:var(--grad)}
 .drug-card .name{font-size:19px;font-weight:800;letter-spacing:-.01em;font-family:var(--font-en)}
 .drug-card .ar{font-size:12.5px;color:#b7c3d9;margin-top:3px}
@@ -271,7 +253,12 @@ select option{background:#0b0f1b;color:#fff}
 .lvl-badge.l-7{color:var(--lvl-7);background:rgba(139,92,246,.1)}
 .lvl-badge.due{animation:duePulse 2s ease-in-out infinite}
 
-/* ============ DETAIL ============ */
+.lib-sentinel{grid-column:1/-1;height:48px;display:flex;align-items:center;justify-content:center}
+.lib-sentinel::before{
+  content:"";width:22px;height:22px;border:2px solid rgba(0,210,255,.2);
+  border-top-color:var(--cyan);border-radius:50%;animation:libSpin .8s linear infinite;
+}
+
 .detail-tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
 .detail-rail{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:stretch;margin-bottom:16px}
 .nav-drug{
@@ -280,12 +267,8 @@ select option{background:#0b0f1b;color:#fff}
   background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.015));
   transition:.22s var(--ease);overflow:hidden;text-align:right;
 }
-.nav-drug.prev{text-align:right}
 .nav-drug.next{text-align:left;direction:ltr}
-.nav-drug:hover:not(.disabled){
-  transform:translateY(-3px);border-color:rgba(0,210,255,.48);
-  box-shadow:0 14px 34px rgba(0,210,255,.1);
-}
+.nav-drug:hover:not(.disabled){transform:translateY(-3px);border-color:rgba(0,210,255,.48)}
 .nav-drug .nav-label{display:block;font-size:9px;letter-spacing:.14em;color:#75849f;margin-bottom:5px;font-weight:600}
 .nav-drug .nav-name{display:block;font-size:14px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:var(--font-en)}
 .nav-drug .nav-ar{display:block;font-size:11px;color:#94a4bd;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -313,7 +296,7 @@ select option{background:#0b0f1b;color:#fff}
   display:grid;place-items:center;font-size:28px;
   box-shadow:0 0 45px rgba(0,210,255,.28);margin-bottom:16px;
 }
-.drug-hero h3{font-size:36px;margin:0;line-height:1.05;letter-spacing:-.02em;font-family:var(--font-en);font-weight:800}
+.drug-hero h3{font-size:clamp(22px, 4vw, 36px);margin:0;line-height:1.05;letter-spacing:-.02em;font-family:var(--font-en);font-weight:800}
 .drug-hero .arname{font-size:15px;color:#bbc6db;margin:6px 0}
 .drug-hero .classline{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:12px}
 .tabs{display:flex;gap:6px;overflow:auto;margin:16px 0 0;padding-bottom:2px;scrollbar-width:thin}
@@ -324,7 +307,6 @@ select option{background:#0b0f1b;color:#fff}
   background:rgba(255,255,255,.03);border:1px solid var(--line);
   color:#aab6cb;font-size:12.5px;transition:.2s var(--ease);
 }
-.tabs button:hover{color:#fff;border-color:rgba(0,210,255,.3)}
 .tabs button.active{
   background:linear-gradient(90deg,rgba(0,210,255,.12),rgba(139,92,246,.12));
   border-color:rgba(0,210,255,.38);color:#fff;
@@ -335,7 +317,6 @@ select option{background:#0b0f1b;color:#fff}
 .info-box h4{margin:0 0 8px;color:#8de9ff;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;font-family:var(--font-en)}
 .info-box p,.info-box li{font-size:13px;line-height:1.8;color:#c8d2e5}
 .info-box p{margin:0 0 6px}
-.info-box p:last-child{margin-bottom:0}
 .info-box ul{padding-right:16px;margin:0}
 .info-box li{margin-bottom:4px}
 .side-stack{display:grid;gap:12px;align-content:start}
@@ -351,7 +332,6 @@ select option{background:#0b0f1b;color:#fff}
 .side-actions{display:grid;gap:8px;padding:14px}
 .side-actions button{width:100%;justify-content:center;font-size:12.5px;min-height:40px}
 
-/* ============ STUDY ============ */
 .study-wrap{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
 .stats-3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .stat-card{
@@ -374,12 +354,12 @@ select option{background:#0b0f1b;color:#fff}
 .nav-btn:hover{border-color:rgba(0,210,255,.4);color:#fff;background:rgba(0,210,255,.06)}
 .nav-btn.reset{color:var(--lvl-0)}
 .nav-btn.reset:hover{background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.3);color:#ff8899}
-.study-center-actions{display:flex;gap:8px;justify-content:center;align-items:center}
+.study-center-actions{display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap}
 .filter-toggle{display:flex;gap:3px;padding:3px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.04)}
 .filter-toggle button{padding:6px 12px;border-radius:8px;background:transparent;color:var(--muted);font-size:11.5px;font-weight:700;transition:.2s}
 .filter-toggle button.active{background:var(--grad);color:#fff;box-shadow:0 3px 10px rgba(0,210,255,.25)}
 
-.card-perspective{perspective:1400px;width:100%;height:440px;cursor:pointer;user-select:none}
+.card-perspective{perspective:1400px;width:100%;height:clamp(340px, 62vh, 440px);cursor:pointer;user-select:none}
 .card-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.34,1.4,.64,1)}
 .card-inner.flipped{transform:rotateY(180deg)}
 .card-face{
@@ -398,12 +378,12 @@ select option{background:#0b0f1b;color:#fff}
   background:var(--grad);border-radius:var(--radius-lg) var(--radius-lg) 0 0;
 }
 .card-face.card-back:before{background:linear-gradient(135deg,var(--lvl-3),var(--cyan))}
-.flash-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.flash-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
 .flash-cat{background:rgba(0,210,255,.1);color:#99eaff;padding:5px 12px;border-radius:999px;font-size:11.5px;font-weight:700;border:1px solid rgba(0,210,255,.2)}
 .flash-lvl{font-size:11px;font-weight:800;padding:4px 10px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--muted);font-family:var(--font-en)}
 .flash-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:18px 0}
 .flash-name{
-  font-size:32px;font-weight:800;line-height:1.15;
+  font-size:clamp(20px, 4vw, 32px);font-weight:800;line-height:1.15;
   font-family:var(--font-en);letter-spacing:-.02em;
   background:linear-gradient(135deg,#fff,#c9d8f7);
   -webkit-background-clip:text;background-clip:text;color:transparent;
@@ -443,7 +423,6 @@ select option{background:#0b0f1b;color:#fff}
 .study-empty h4{font-size:18px;margin:0 0 8px;color:var(--text)}
 .study-empty p{margin:0 0 16px;font-size:13px}
 
-/* ============ QUIZ ============ */
 .quiz-wrap{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
 .quiz-setup-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .quiz-setup-grid .full{grid-column:1/-1}
@@ -455,7 +434,6 @@ select option{background:#0b0f1b;color:#fff}
   font-size:12.5px;line-height:1.8;color:#b7c3d9;
 }
 .quiz-hint-box strong{color:#99eaff}
-
 .quiz-topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
 .quiz-score{display:flex;gap:8px}
 .quiz-badge{
@@ -476,7 +454,7 @@ select option{background:#0b0f1b;color:#fff}
   box-shadow:0 0 20px rgba(0,210,255,.35);width:0%;
 }
 .quiz-q-num{font-size:12px;color:var(--muted);font-weight:600;margin-bottom:10px;font-family:var(--font-en)}
-.quiz-q-text{font-size:19px;font-weight:800;line-height:1.6;margin-bottom:20px;color:var(--text)}
+.quiz-q-text{font-size:clamp(15px, 2.6vw, 19px);font-weight:800;line-height:1.6;margin-bottom:20px;color:var(--text)}
 .quiz-options{display:grid;gap:10px;margin-bottom:14px}
 .quiz-option{
   display:flex;align-items:center;gap:12px;
@@ -485,10 +463,7 @@ select option{background:#0b0f1b;color:#fff}
   color:var(--text);font-size:14px;font-weight:600;text-align:right;
   cursor:pointer;transition:.2s var(--ease);font-family:var(--font-ar);
 }
-.quiz-option:hover:not(:disabled){
-  border-color:rgba(0,210,255,.5);background:rgba(0,210,255,.06);
-  transform:translateX(-3px);
-}
+.quiz-option:hover:not(:disabled){border-color:rgba(0,210,255,.5);background:rgba(0,210,255,.06);transform:translateX(-3px)}
 .quiz-option:disabled{cursor:default}
 .quiz-option .opt-letter{
   width:30px;height:30px;border-radius:50%;
@@ -498,15 +473,9 @@ select option{background:#0b0f1b;color:#fff}
 }
 .quiz-option .opt-text{flex:1}
 .quiz-option .opt-status{font-size:18px;font-weight:800;flex-shrink:0;width:20px}
-.quiz-option.correct{
-  background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.5);color:#4ade80;
-  animation:correctPulse .4s ease;
-}
+.quiz-option.correct{background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.5);color:#4ade80;animation:correctPulse .4s ease}
 .quiz-option.correct .opt-letter{background:rgba(34,197,94,.2);color:#4ade80}
-.quiz-option.wrong{
-  background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.5);color:#f87171;
-  animation:shake .4s ease;
-}
+.quiz-option.wrong{background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.5);color:#f87171;animation:shake .4s ease}
 .quiz-option.wrong .opt-letter{background:rgba(239,68,68,.2);color:#f87171}
 .quiz-explanation{
   padding:14px 16px;border-radius:12px;
@@ -517,7 +486,6 @@ select option{background:#0b0f1b;color:#fff}
 .quiz-explanation strong{color:#99eaff}
 .quiz-nav-btns{display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap}
 .quiz-nav-btns button{flex:1;justify-content:center;min-width:120px}
-
 .quiz-result{padding:32px;text-align:center}
 .quiz-result-circle{
   width:150px;height:150px;border-radius:50%;
@@ -527,10 +495,7 @@ select option{background:#0b0f1b;color:#fff}
   box-shadow:0 15px 45px rgba(0,210,255,.35),0 0 80px rgba(0,210,255,.15);
   position:relative;
 }
-.quiz-result-circle:before{
-  content:"";position:absolute;inset:-8px;border-radius:50%;
-  border:2px solid rgba(0,210,255,.25);
-}
+.quiz-result-circle:before{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid rgba(0,210,255,.25)}
 .quiz-result-pct{font-size:38px;font-weight:900;font-family:var(--font-en);line-height:1}
 .quiz-result-ratio{font-size:13px;opacity:.85;font-family:var(--font-en);margin-top:6px}
 .quiz-result-stats{display:flex;gap:24px;justify-content:center;margin:20px 0;font-size:14px;flex-wrap:wrap}
@@ -554,7 +519,6 @@ select option{background:#0b0f1b;color:#fff}
 .quiz-review-item .q-wrong{color:#f87171}
 .quiz-review-item .q-exp{font-size:11.5px;color:var(--muted);margin-top:6px;padding-top:6px;border-top:1px dashed var(--line)}
 
-/* ============ MODALS ============ */
 .modal-back{position:fixed;inset:0;background:rgba(2,3,8,.8);backdrop-filter:blur(12px);z-index:90;display:none;align-items:center;justify-content:center;padding:24px}
 .modal-back.open{display:flex}
 .modal{
@@ -576,30 +540,21 @@ select option{background:#0b0f1b;color:#fff}
   border:1px solid var(--line);color:#fff;border-radius:12px;
   padding:12px 15px;outline:none;transition:.22s var(--ease);font-size:13px;
 }
-.modal input:focus,.modal textarea:focus,.modal select:focus{
-  border-color:rgba(0,210,255,.55);box-shadow:0 0 0 4px rgba(0,210,255,.07);
-}
 .modal textarea{resize:vertical;font-family:inherit;line-height:1.65}
 
-/* ============ DOCK ============ */
 .dock{
   position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:60;
   display:flex;align-items:center;gap:6px;padding:9px;
   border:1px solid rgba(255,255,255,.13);border-radius:22px;
   background:rgba(9,12,24,.78);backdrop-filter:blur(22px);
-  box-shadow:0 18px 55px rgba(0,0,0,.52),0 0 50px rgba(0,210,255,.08);
+  box-shadow:0 18px 55px rgba(0,0,0,.52);
 }
 .dock button{
   width:46px;height:46px;border-radius:14px;
   background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);
   font-size:18px;transition:.24s var(--ease);position:relative;
 }
-.dock button:hover{
-  transform:translateY(-8px) scale(1.08);
-  background:linear-gradient(145deg,rgba(0,210,255,.16),rgba(139,92,246,.16));
-  border-color:rgba(0,210,255,.42);
-  box-shadow:0 12px 25px rgba(0,210,255,.18);
-}
+.dock button:hover{transform:translateY(-8px) scale(1.08);background:linear-gradient(145deg,rgba(0,210,255,.16),rgba(139,92,246,.16));border-color:rgba(0,210,255,.42)}
 .dock .tip{
   position:absolute;bottom:56px;left:50%;transform:translateX(-50%) translateY(7px);
   padding:5px 9px;border-radius:8px;background:#0f1422;border:1px solid var(--line);
@@ -607,7 +562,6 @@ select option{background:#0b0f1b;color:#fff}
 }
 .dock button:hover .tip{opacity:1;transform:translateX(-50%) translateY(0)}
 
-/* ============ TOAST ============ */
 .toast{
   position:fixed;top:22px;left:50%;transform:translate(-50%,-15px);
   padding:12px 18px;border-radius:13px;background:#101629;
@@ -618,22 +572,16 @@ select option{background:#0b0f1b;color:#fff}
 }
 .toast.show{opacity:1;transform:translate(-50%,0)}
 
-/* ============ EMPTY ============ */
 .empty{padding:55px;text-align:center;border:1px dashed rgba(255,255,255,.14);border-radius:var(--radius);color:var(--muted);font-size:14px}
 .empty-actions{display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap}
 .empty-icon{font-size:40px;margin-bottom:12px}
 
-/* ============ IMPORT ============ */
 .import-zone{
   border:1px dashed rgba(0,210,255,.35);border-radius:18px;padding:24px;
   background:linear-gradient(145deg,rgba(0,210,255,.055),rgba(139,92,246,.04));
   cursor:pointer;transition:.22s var(--ease);text-align:center;
 }
-.import-zone:hover,.import-zone.drag{
-  border-color:var(--cyan);
-  background:linear-gradient(145deg,rgba(0,210,255,.1),rgba(139,92,246,.07));
-  box-shadow:0 0 30px rgba(0,210,255,.08);
-}
+.import-zone:hover,.import-zone.drag{border-color:var(--cyan);background:linear-gradient(145deg,rgba(0,210,255,.1),rgba(139,92,246,.07))}
 .import-zone strong{display:block;font-size:15px;font-weight:700}
 .import-zone span{display:block;color:var(--muted);font-size:11px;margin-top:6px}
 .import-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
@@ -641,7 +589,6 @@ select option{background:#0b0f1b;color:#fff}
 .import-stat b{display:block;font-size:20px;font-weight:900;font-family:var(--font-en)}
 .import-stat span{color:var(--muted);font-size:10px;margin-top:3px;display:block}
 
-/* ============ PAGES ============ */
 .page{display:none;animation:fadeIn .3s var(--ease)}
 .page.active{display:block}
 .page-title{font-size:34px;font-weight:900;margin:0 0 6px;letter-spacing:-.02em}
@@ -651,41 +598,93 @@ select option{background:#0b0f1b;color:#fff}
 @media(max-width:1260px){
   .app{grid-template-columns:220px 1fr}
   .main{padding:20px 20px 130px}
-  .hero h2{font-size:32px}
   .drugs-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:1024px) and (min-width:901px){
+  .drugs-grid{grid-template-columns:repeat(2,1fr)}
+  .detail-layout{grid-template-columns:1fr}
+  .info-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:900px){
   .app{grid-template-columns:1fr}
   .sidebar{
     position:fixed;bottom:0;top:auto;height:auto;width:100%;
-    flex-direction:row;align-items:center;padding:8px;z-index:100;
+    flex-direction:row;align-items:center;padding:8px 6px;z-index:100;
     border-left:none;border-top:1px solid var(--line);
-    background:rgba(7,9,18,.92);overflow-x:auto;
+    background:rgba(7,9,18,.94);backdrop-filter:blur(20px);
+    overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;
   }
   .brand,.side-stats,.side-footer{display:none}
-  .nav{flex-direction:row;justify-content:space-around;flex:1;gap:4px}
-  .nav button{width:auto;padding:9px 12px;font-size:12px;white-space:nowrap}
+  .nav{flex-direction:row;justify-content:space-around;flex:1;gap:4px;min-width:0}
+  .nav button{width:auto;padding:9px 10px;font-size:12px;white-space:nowrap;min-width:0;flex-shrink:0}
   .nav button.active:before{display:none}
   .nav .kbd{display:none}
-  .main{padding:16px 16px 110px}
-  .hero-main{padding:26px 20px}
-  .hero h2{font-size:24px}
-  .topbar{flex-direction:column;align-items:stretch}
-  .top-actions{justify-content:center}
+  .main{padding:16px 14px 100px}
+  .hero-main{padding:24px 18px}
+  .hero p{font-size:13px}
+  .topbar{flex-direction:column;align-items:stretch;gap:10px}
+  .top-actions{justify-content:center;flex-wrap:wrap}
+  .top-actions .iconbtn,.top-actions .primary{flex:1 1 110px;justify-content:center;padding:9px 12px;font-size:12px}
   .detail-layout{grid-template-columns:1fr}
   .drugs-grid{grid-template-columns:1fr}
-  .detail-rail{grid-template-columns:1fr;gap:8px}
-  .nav-center{min-width:auto;padding:10px}
+  .detail-rail{grid-template-columns:1fr 1fr;gap:8px}
+  .nav-center{grid-column:1/-1;min-width:auto;padding:8px}
   .dock{display:none}
   .info-grid{grid-template-columns:1fr}
   .form-grid{grid-template-columns:1fr}
   .quiz-setup-grid{grid-template-columns:1fr}
-  .drug-hero h3{font-size:30px}
-  .card-perspective{height:400px}
-  .flash-name{font-size:26px}
-  .quiz-q-text{font-size:16px}
+  .drug-hero{padding:20px 18px}
+  .drug-hero .symbol{width:52px;height:52px;font-size:24px}
+  .flash-ar-name{font-size:14px}
   .quiz-result-circle{width:130px;height:130px}
-  .quiz-result-pct{font-size:32px}
+  .quiz-result-pct{font-size:30px}
+  .study-toolbar{grid-template-columns:1fr;gap:8px}
+  .study-toolbar>.nav-btn{width:100%;justify-content:center}
+  .tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tabs::-webkit-scrollbar{display:none}
+}
+@media(max-width:600px){
+  .nav button{padding:8px 8px;font-size:11px;gap:2px}
+  .nav .left{gap:4px}
+  .nav-badge{font-size:9px;padding:1px 5px}
+  .main{padding:12px 12px 96px}
+  .page-title{font-size:24px}
+  .section-head h3{font-size:15px}
+  .toolbar{flex-direction:column;align-items:stretch}
+  .toolbar .field{max-width:100%!important;min-width:0}
+  .detail-tools .ghost,.detail-tools .primary{flex:1 1 45%;justify-content:center;padding:8px 10px;font-size:11.5px;min-height:38px}
+  .drug-card{padding:14px}
+  .drug-card .name{font-size:16px}
+  .quiz-option{padding:12px;font-size:13px;gap:10px}
+  .quiz-option .opt-letter{width:26px;height:26px;font-size:12px}
+  .quiz-topbar{gap:8px}
+  .quiz-timer{font-size:12px;padding:5px 10px}
+  .quiz-nav-btns button{flex:1 1 100%;min-width:0}
+  .btn-fsrs{padding:8px 2px;font-size:10.5px}
+  .btn-fsrs .kbd-shortcut{display:none}
+  .flash-cat,.flash-lvl{font-size:10.5px;padding:4px 9px}
+  .stat-card b{font-size:18px}
+  .rating-grid{grid-template-columns:repeat(2,1fr)}
+  .shortcuts-bar{font-size:10px;gap:8px}
+  .modal{padding:16px;width:calc(100vw - 24px)}
+  .modal h3{font-size:17px}
+  .detail-content{padding:16px}
+  .info-box{padding:12px}
+  .side-actions button{font-size:12px;min-height:38px}
+  .quiz-result-stats{gap:14px;font-size:13px}
+  .quiz-result-actions button{flex:1 1 100%}
+}
+@media(max-width:400px){
+  .nav .left b{display:none}
+  .nav .left{gap:0}
+  .nav button{padding:9px 6px}
+  .drugs-grid{gap:10px}
+  .stats-3{gap:6px}
+  .stat-card{padding:10px 6px}
+}
+@supports(padding: max(0px)){
+  .sidebar{padding-bottom:max(8px, env(safe-area-inset-bottom))}
+  .main{padding-bottom:max(96px, calc(80px + env(safe-area-inset-bottom)))}
 }
 </style>
 </head>
@@ -721,7 +720,6 @@ select option{background:#0b0f1b;color:#fff}
       </div>
     </div>
 
-    <!-- ============ LIBRARY ============ -->
     <section id="page-search" class="page active">
       <div class="hero">
         <div class="hero-main">
@@ -743,14 +741,13 @@ select option{background:#0b0f1b;color:#fff}
       <div class="section">
         <div class="section-head"><div><h3>الأدوية</h3><p id="drugsCount">0 دواء</p></div></div>
         <div class="toolbar">
-          <div class="field"><input id="searchInput" placeholder="ابحث بالاسم العلمي أو العربي أو المجموعة..." oninput="renderDrugLibrary()"></div>
+          <div class="field"><input id="searchInput" placeholder="ابحث بالاسم العلمي أو العربي أو المجموعة..." oninput="debouncedRenderLibrary()"></div>
           <div class="field" style="max-width:260px"><select id="catFilter" onchange="renderDrugLibrary()"><option value="all">كل المجموعات</option></select></div>
         </div>
         <div id="drugLibrary" class="drugs-grid"></div>
       </div>
     </section>
 
-    <!-- ============ STUDY ============ -->
     <section id="page-study" class="page">
       <div class="study-wrap">
         <div class="stats-3">
@@ -775,49 +772,34 @@ select option{background:#0b0f1b;color:#fff}
       </div>
     </section>
 
-    <!-- ============ QUIZ ============ -->
     <section id="page-quiz" class="page">
       <div class="quiz-wrap">
-        <!-- Setup phase -->
         <div id="quizSetup">
           <div class="panel pad quiz-setup-panel">
             <h3 style="margin:0 0 6px;font-size:18px">🎯 إعداد الاختبار</h3>
             <p class="small muted" style="margin:0 0 16px">يتم توليد الأسئلة تلقائياً من استطبابات الأدوية في مكتبتك</p>
             <div class="quiz-setup-grid">
-              <div>
-                <label class="label">عدد الأسئلة</label>
-                <input type="number" id="quizCount" value="10" min="1" max="50">
-              </div>
-              <div>
-                <label class="label">المؤقت لكل سؤال (ثانية، 0 = بدون)</label>
-                <input type="number" id="quizTimerInput" value="30" min="0" max="300">
-              </div>
-              <div class="full">
-                <label class="label">نطاق الأسئلة (المجموعة الدوائية)</label>
-                <select id="quizCategory"><option value="all">كل المجموعات</option></select>
-              </div>
+              <div><label class="label">عدد الأسئلة</label><input type="number" id="quizCount" value="10" min="1" max="50"></div>
+              <div><label class="label">المؤقت لكل سؤال (ثانية، 0 = بدون)</label><input type="number" id="quizTimerInput" value="30" min="0" max="300"></div>
+              <div class="full"><label class="label">نطاق الأسئلة (المجموعة الدوائية)</label><select id="quizCategory"><option value="all">كل المجموعات</option></select></div>
             </div>
             <button class="primary" onclick="startDrugQuiz()">🚀 ابدأ الاختبار</button>
           </div>
-
           <div class="panel pad" style="margin-top:14px">
             <div class="quiz-hint-box">
               <strong>💡 كيف يعمل؟</strong> كل سؤال يعرض استطباباً معيناً، وعليك اختيار الدواء المرتبط به من بين 4 خيارات. الخيارات الخاطئة مضمونة أنها لا تملك ذلك الاستطباب — لضمان دقة السؤال.
             </div>
           </div>
-
           <div class="panel pad" style="margin-top:14px">
             <h3 style="margin:0 0 8px;font-size:15px">📂 أسئلة مخصصة (اختياري)</h3>
             <p class="small muted" style="margin:0 0 12px;line-height:1.7">استورد ملف JSON بصيغة <code style="background:rgba(255,255,255,.06);padding:2px 6px;border-radius:4px">[{"question":"...","options":["..."],"correctIndex":0,"explanation":"..."}]</code></p>
             <div class="import-zone" id="quizDropZone" onclick="document.getElementById('quizCustomFile').click()" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="handleQuizDrop(event)">
-              <strong>📄 اسحب ملف أسئلة JSON هنا</strong>
-              <span>أو اضغط لاختيار الملف</span>
+              <strong>📄 اسحب ملف أسئلة JSON هنا</strong><span>أو اضغط لاختيار الملف</span>
             </div>
             <input type="file" id="quizCustomFile" accept=".json" class="hidden" onchange="loadCustomQuizFile(this.files[0])">
           </div>
         </div>
 
-        <!-- Playing phase -->
         <div id="quizArea" style="display:none">
           <div class="quiz-topbar">
             <button class="ghost" onclick="confirmExitQuiz()" style="color:#f87171;border-color:rgba(239,68,68,.3)">✖ إلغاء</button>
@@ -827,9 +809,7 @@ select option{background:#0b0f1b;color:#fff}
             </div>
             <span class="quiz-timer" id="quizTimer">⏳ 30</span>
           </div>
-
           <div class="quiz-progress"><div class="quiz-progress-fill" id="quizProgressFill"></div></div>
-
           <div class="panel pad" style="margin-top:14px">
             <div class="quiz-q-num" id="quizQuestionNum">السؤال 1 من 10</div>
             <div class="quiz-q-text" id="quizQuestionText"></div>
@@ -840,7 +820,6 @@ select option{background:#0b0f1b;color:#fff}
               <button class="primary" id="quizNextBtn" onclick="nextQuizQuestion()" style="visibility:hidden">التالي ←</button>
             </div>
           </div>
-
           <div class="shortcuts-bar" style="margin-top:12px">
             <span><span class="kbd">A–D</span> أو <span class="kbd">1–4</span> للاختيار</span>
             <span><span class="kbd">Enter</span> أو <span class="kbd">←</span> التالي</span>
@@ -848,7 +827,6 @@ select option{background:#0b0f1b;color:#fff}
           </div>
         </div>
 
-        <!-- Result phase -->
         <div id="quizResult" style="display:none">
           <div class="panel quiz-result">
             <h2 style="font-size:22px;margin:0 0 6px">🎉 اكتمل الاختبار</h2>
@@ -874,7 +852,6 @@ select option{background:#0b0f1b;color:#fff}
       </div>
     </section>
 
-    <!-- ============ DETAIL ============ -->
     <section id="page-detail" class="page">
       <div class="detail-tools">
         <button class="ghost" onclick="showPage('search')">← العودة للمكتبة</button>
@@ -895,22 +872,21 @@ select option{background:#0b0f1b;color:#fff}
 </div>
 <div class="toast" id="toast"></div>
 
-<!-- Modal: Drug Form -->
-<div class="modal-back" id="drugModal"><div class="modal"><h3 id="drugModalTitle">إضافة دواء جديد</h3><form onsubmit="saveDrug(event)"><input type="hidden" id="editDrugId"><div class="form-grid"><div><label class="label">الاسم العلمي</label><input id="fGeneric" required></div><div><label class="label">الاسم بالعربي</label><input id="fAr" required></div><div><label class="label">المجموعة</label><select id="fCat"></select></div><div><label class="label">التصنيف الإنكليزي</label><input id="fClassEn"></div><div><label class="label">التصنيف العربي</label><input id="fClassAr"></div><div class="full"><label class="label">آلية العمل الإنكليزية</label><textarea id="fMechEn" rows="2"></textarea></div><div class="full"><label class="label">آلية العمل بالعربي</label><textarea id="fMechAr" rows="2"></textarea></div><div class="full"><label class="label">الاستطبابات — سطر لكل استخدام (بصيغة: English — العربية)</label><textarea id="fUses" rows="3" placeholder="Pain — الألم&#10;Fever — الحمى"></textarea></div><div><label class="label">الآثار الجانبية — سطر لكل أثر</label><textarea id="fEffects" rows="3"></textarea></div><div><label class="label">موانع الاستعمال — سطر لكل مانع</label><textarea id="fContra" rows="3"></textarea></div><div class="full"><label class="label">الأشكال الصيدلانية — سطر لكل شكل</label><textarea id="fForms" rows="2"></textarea></div></div><div class="form-actions"><button class="primary" type="submit">حفظ الدواء</button><button class="ghost" type="button" onclick="closeModal('drugModal')">إلغاء</button></div></form></div></div>
+<div class="modal-back" id="drugModal"><div class="modal"><h3 id="drugModalTitle">إضافة دواء جديد</h3><form onsubmit="saveDrug(event)"><input type="hidden" id="editDrugId"><div class="form-grid"><div><label class="label">الاسم العلمي</label><input id="fGeneric" required></div><div><label class="label">الاسم بالعربي</label><input id="fAr" required></div><div><label class="label">المجموعة</label><select id="fCat"></select></div><div><label class="label">التصنيف الإنكليزي</label><input id="fClassEn"></div><div><label class="label">التصنيف العربي</label><input id="fClassAr"></div><div class="full"><label class="label">آلية العمل الإنكليزية</label><textarea id="fMechEn" rows="2"></textarea></div><div class="full"><label class="label">آلية العمل بالعربي</label><textarea id="fMechAr" rows="2"></textarea></div><div class="full"><label class="label">الاستطبابات — سطر لكل استخدام (بصيغة: English — العربية)</label><textarea id="fUses" rows="3" placeholder="Pain — الألم&#10;Fever — الحمى"></textarea></div><div><label class="label">الآثار الجانبية</label><textarea id="fEffects" rows="3"></textarea></div><div><label class="label">موانع الاستعمال</label><textarea id="fContra" rows="3"></textarea></div><div class="full"><label class="label">الأشكال الصيدلانية</label><textarea id="fForms" rows="2"></textarea></div></div><div class="form-actions"><button class="primary" type="submit">حفظ الدواء</button><button class="ghost" type="button" onclick="closeModal('drugModal')">إلغاء</button></div></form></div></div>
 
-<!-- Modal: Category Form -->
 <div class="modal-back" id="catModal"><div class="modal" style="max-width:520px"><h3 id="catModalTitle">إضافة مجموعة دوائية</h3><form onsubmit="saveCategory(event)"><input type="hidden" id="editCatOldKey"><div class="form-group"><label class="label">اسم المجموعة (بالإنكليزي):</label><input id="formCatEn" required></div><div class="form-group"><label class="label">اسم المجموعة (بالعربي):</label><input id="formCatArName" required></div><div class="form-actions"><button class="primary" type="submit">حفظ المجموعة</button><button class="ghost" type="button" onclick="closeModal('catModal')">إلغاء</button></div></form></div></div>
 
-<!-- Modal: Import -->
 <div class="modal-back" id="importModal"><div class="modal" style="max-width:720px"><h3>⇩ استيراد أدوية</h3><p class="small muted" style="margin-top:-8px;line-height:1.8">يدعم ملفات JSON بصيغة Pharma Nova أو PharmaFlash FSRS. سيتم دمج بيانات FSRS إن وجدت.</p><input id="importFileInput" type="file" accept=".json,application/json" class="hidden" onchange="handleImportFile(this.files[0])"><div id="importDropZone" class="import-zone" onclick="document.getElementById('importFileInput').click()" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="handleDrop(event)"><strong>اسحب ملف JSON إلى هنا</strong><span>أو اضغط لاختيار الملف</span></div><div id="importPreview" class="hidden"></div><div class="form-actions"><button class="ghost" onclick="closeModal('importModal')">إغلاق</button></div></div></div>
 
-<!-- Modal: Compare -->
 <div class="modal-back" id="compareModal"><div class="modal"><h3>⇄ مقارنة دواءين</h3><div class="form-grid"><div><label class="label">الدواء الأول</label><select id="cmpA"></select></div><div><label class="label">الدواء الثاني</label><select id="cmpB"></select></div></div><div id="compareBody" style="margin-top:16px"></div><div class="form-actions"><button class="ghost" onclick="closeModal('compareModal')">إغلاق</button></div></div></div>
 
 <script>
 /* ======================= CONSTANTS ======================= */
 var STORAGE_CATS = 'pharmaNovaCats_v2';
 var STORAGE_DRUGS = 'pharmaNovaDrugs_v2';
+var STORAGE_TS = 'pharmaNova_ts';
+var INDEX_SYNC_THRESHOLD = 1500;
+var WORKER_THRESHOLD = 3000;
 
 var knownCategoryTranslations = {
   "Analgesics & NSAIDs": "المسكنات ومضادات الالتهاب",
@@ -949,14 +925,14 @@ var studyIndex = 0;
 var currentStudyDrug = null;
 
 var quizState = {
-  phase: 'setup', // 'setup' | 'playing' | 'result'
+  phase: 'setup',
   questions: [],
   currentIndex: 0,
   timerInterval: null,
   timeLeft: 0,
   settings: { timerSeconds: 30 },
   isActive: false,
-  source: 'library' // 'library' | 'custom'
+  source: 'library'
 };
 
 /* ======================= UTILS ======================= */
@@ -981,35 +957,6 @@ function migrateFsrs(d){
   return d;
 }
 
-function loadAll(){
-  var rawCats = localStorage.getItem(STORAGE_CATS);
-  if(rawCats === null){
-    categories = Object.assign({}, defaultCategories);
-  } else {
-    var parsed = safeParse(rawCats);
-    categories = (parsed && typeof parsed === 'object') ? parsed : Object.assign({}, defaultCategories);
-  }
-
-  var rawDrugs = localStorage.getItem(STORAGE_DRUGS);
-  if(rawDrugs === null){
-    drugs = defaultDrugs.map(migrateFsrs).filter(Boolean);
-  } else {
-    var arr = safeParse(rawDrugs);
-    if(Array.isArray(arr)){
-      drugs = arr.map(migrateFsrs).filter(Boolean);
-    } else {
-      drugs = defaultDrugs.map(migrateFsrs).filter(Boolean);
-    }
-  }
-}
-
-function persist(){
-  try {
-    localStorage.setItem(STORAGE_CATS, JSON.stringify(categories));
-    localStorage.setItem(STORAGE_DRUGS, JSON.stringify(drugs));
-  } catch(e){ console.error('Persist failed:', e); }
-}
-
 function esc(v){
   return String(v == null ? '' : v).replace(/[&<>'"]/g, function(c){
     return {'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c];
@@ -1026,8 +973,6 @@ function toast(msg){
 }
 
 function isDue(d){ return (d.nextReview || 0) <= Date.now(); }
-function dueCount(){ return drugs.filter(isDue).length; }
-function learnedCount(){ return drugs.filter(function(d){ return (d.level||0) >= 4; }).length; }
 
 function formatNextReview(ts){
   if(!ts || ts === 0) return 'لم تُدرس';
@@ -1037,8 +982,7 @@ function formatNextReview(ts){
   if(mins < 60) return mins + ' دقيقة';
   var hrs = Math.round(diff / 3600000);
   if(hrs < 24) return hrs + ' ساعة';
-  var days = Math.round(diff / 86400000);
-  return days + ' يوم';
+  return Math.round(diff / 86400000) + ' يوم';
 }
 
 function calculateDynamicInterval(level, factor){ return baseIntervalsDays[level] * (factor || 1.0); }
@@ -1061,6 +1005,308 @@ function findDrugById(id){
   return null;
 }
 
+/* ======================= PERFORMANCE CORE ======================= */
+function debounce(fn, delay){
+  var t = null;
+  return function(){
+    var ctx = this, args = arguments;
+    clearTimeout(t);
+    t = setTimeout(function(){ fn.apply(ctx, args); }, delay || 150);
+  };
+}
+
+var debouncedRenderLibrary = debounce(function(){ renderDrugLibrary(); }, 140);
+
+var libraryState = {
+  filtered: [],
+  rendered: 0,
+  pageSize: 60,
+  searchIndex: new Map(),
+  indexVersion: 0
+};
+
+var countsCache = { due: 0, learned: 0, total: 0, version: -1 };
+function invalidateCounts(){ countsCache.version = -1; }
+
+function getCounts(){
+  if(countsCache.version !== libraryState.indexVersion){
+    var due = 0, learned = 0, now = Date.now();
+    for(var i = 0; i < drugs.length; i++){
+      var d = drugs[i];
+      if((d.nextReview || 0) <= now) due++;
+      if((d.level || 0) >= 4) learned++;
+    }
+    countsCache.due = due;
+    countsCache.learned = learned;
+    countsCache.total = drugs.length;
+    countsCache.version = libraryState.indexVersion;
+  }
+  return countsCache;
+}
+
+function dueCount(){ return getCounts().due; }
+function learnedCount(){ return getCounts().learned; }
+
+function updateSidebarStats(){
+  var c = getCounts();
+  var sd = document.getElementById('sideDue');     if(sd) sd.textContent = c.due;
+  var sl = document.getElementById('sideLearned'); if(sl) sl.textContent = c.learned;
+  var st = document.getElementById('sideTotal');   if(st) st.textContent = c.total;
+  var badge = document.getElementById('navDueBadge');
+  if(badge){
+    badge.textContent = c.due;
+    badge.className = 'nav-badge' + (c.due > 0 ? '' : ' green');
+  }
+}
+
+function buildIndexSync(){
+  var idx = new Map();
+  var cats = categories;
+  for(var i = 0; i < drugs.length; i++){
+    var d = drugs[i];
+    var parts = [d.generic||'', d.ar||'', d.cat||'', d.classEn||'', d.classAr||'',
+                 d.mechanism||'', d.mechanismAr||'', cats[d.cat]||''];
+    if(d.uses)    for(var j=0;j<d.uses.length;j++)    parts.push(d.uses[j]);
+    if(d.effects) for(var k=0;k<d.effects.length;k++) parts.push(d.effects[k]);
+    idx.set(d.id, parts.join(' ').toLowerCase());
+  }
+  libraryState.searchIndex = idx;
+  libraryState.indexVersion++;
+  invalidateCounts();
+}
+
+function buildIndexChunked(onDone){
+  var idx = new Map();
+  var cats = categories;
+  var i = 0;
+  var hasIdle = typeof requestIdleCallback === 'function';
+
+  function process(deadline){
+    var budget = deadline && deadline.timeRemaining ? deadline.timeRemaining() : 8;
+    while(i < drugs.length && budget > 1){
+      var end = Math.min(i + 300, drugs.length);
+      for(; i < end; i++){
+        var d = drugs[i];
+        var parts = [d.generic||'', d.ar||'', d.cat||'', d.classEn||'', d.classAr||'',
+                     d.mechanism||'', d.mechanismAr||'', cats[d.cat]||''];
+        if(d.uses)    for(var j=0;j<d.uses.length;j++)    parts.push(d.uses[j]);
+        if(d.effects) for(var k=0;k<d.effects.length;k++) parts.push(d.effects[k]);
+        idx.set(d.id, parts.join(' ').toLowerCase());
+      }
+      budget -= 3;
+    }
+    if(i < drugs.length){
+      if(hasIdle) requestIdleCallback(process, {timeout: 300});
+      else setTimeout(function(){ process(null); }, 0);
+    } else {
+      libraryState.searchIndex = idx;
+      libraryState.indexVersion++;
+      invalidateCounts();
+      if(onDone) onDone();
+    }
+  }
+  if(hasIdle) requestIdleCallback(process, {timeout: 300});
+  else setTimeout(function(){ process(null); }, 0);
+}
+
+function rebuildSearchIndex(allowChunked){
+  var useChunked = allowChunked && drugs.length >= INDEX_SYNC_THRESHOLD
+                   && typeof requestIdleCallback === 'function';
+  if(useChunked){
+    buildIndexChunked(function(){
+      if(filterWorker && filterWorkerReady) syncWorkerIndex();
+    });
+  } else {
+    buildIndexSync();
+    if(filterWorker && filterWorkerReady) syncWorkerIndex();
+  }
+}
+
+/* --- Filtering --- */
+function filterDrugsLocal(q, cat){
+  var out = [];
+  var idx = libraryState.searchIndex;
+  for(var i = 0; i < drugs.length; i++){
+    var d = drugs[i];
+    if(cat !== 'all' && d.cat !== cat) continue;
+    if(q){
+      var hay = idx.get(d.id);
+      if(!hay || hay.indexOf(q) === -1) continue;
+    }
+    out.push(d);
+  }
+  return out;
+}
+
+var filterWorker = null;
+var filterWorkerReady = false;
+var filterReqId = 0;
+var filterPendingCallbacks = {};
+var latestQueryId = 0;
+
+function initFilterWorker(){
+  if(drugs.length < WORKER_THRESHOLD || typeof Worker === 'undefined') return;
+  try {
+    var code = [
+      'var data=[];',
+      'self.onmessage=function(e){',
+      '  var m=e.data;',
+      '  if(m.type==="index"){data=m.items;self.postMessage({type:"ready"});}',
+      '  else if(m.type==="query"){',
+      '    var q=m.q,c=m.cat,out=[];',
+      '    for(var i=0;i<data.length;i++){',
+      '      var it=data[i];',
+      '      if(c!=="all"&&it.cat!==c)continue;',
+      '      if(q&&it.hay.indexOf(q)===-1)continue;',
+      '      out.push(it.id);',
+      '    }',
+      '    self.postMessage({type:"result",reqId:m.reqId,ids:out});',
+      '  }',
+      '};'
+    ].join('\n');
+    var blob = new Blob([code], {type:'application/javascript'});
+    filterWorker = new Worker(URL.createObjectURL(blob));
+    filterWorker.onmessage = function(e){
+      var m = e.data;
+      if(m.type === 'ready'){ filterWorkerReady = true; return; }
+      if(m.type === 'result'){
+        var cb = filterPendingCallbacks[m.reqId];
+        if(cb){ delete filterPendingCallbacks[m.reqId]; cb(m.ids); }
+      }
+    };
+    syncWorkerIndex();
+  } catch(e){
+    console.warn('Worker unavailable:', e);
+    filterWorker = null;
+  }
+}
+
+function syncWorkerIndex(){
+  if(!filterWorker || !filterWorkerReady) return;
+  var items = drugs.map(function(d){
+    return { id:d.id, cat:d.cat, hay: libraryState.searchIndex.get(d.id) || '' };
+  });
+  filterWorker.postMessage({type:'index', items: items});
+  filterWorkerReady = false; // will re-enable on 'ready'
+}
+
+function filterDrugs(q, cat, callback){
+  if(!filterWorker || !filterWorkerReady){
+    callback(filterDrugsLocal(q, cat));
+    return;
+  }
+  var myId = ++latestQueryId;
+  var reqId = ++filterReqId;
+  var byId = new Map();
+  for(var i = 0; i < drugs.length; i++) byId.set(drugs[i].id, drugs[i]);
+  filterPendingCallbacks[reqId] = function(ids){
+    if(myId !== latestQueryId) return;
+    var out = [];
+    for(var j = 0; j < ids.length; j++){
+      var d = byId.get(ids[j]);
+      if(d) out.push(d);
+    }
+    callback(out);
+  };
+  filterWorker.postMessage({type:'query', q:q, cat:cat, reqId:reqId});
+}
+
+/* ======================= IndexedDB ======================= */
+var db = null;
+
+function openDB(){
+  return new Promise(function(resolve){
+    if(!('indexedDB' in window)){ resolve(null); return; }
+    try {
+      var req = indexedDB.open('pharmaNovaDB', 1);
+      req.onupgradeneeded = function(e){
+        var d = e.target.result;
+        if(!d.objectStoreNames.contains('kv')) d.createObjectStore('kv');
+      };
+      req.onsuccess = function(e){ resolve(e.target.result); };
+      req.onerror   = function(){ resolve(null); };
+      req.onblocked = function(){ resolve(null); };
+    } catch(e){ resolve(null); }
+  });
+}
+
+function idbGet(key){
+  return new Promise(function(resolve){
+    if(!db){ resolve(undefined); return; }
+    try {
+      var tx = db.transaction('kv', 'readonly');
+      var req = tx.objectStore('kv').get(key);
+      req.onsuccess = function(){ resolve(req.result); };
+      req.onerror   = function(){ resolve(undefined); };
+    } catch(e){ resolve(undefined); }
+  });
+}
+
+function idbSet(key, val){
+  return new Promise(function(resolve){
+    if(!db){ resolve(false); return; }
+    try {
+      var tx = db.transaction('kv', 'readwrite');
+      tx.objectStore('kv').put(val, key);
+      tx.oncomplete = function(){ resolve(true); };
+      tx.onerror    = function(){ resolve(false); };
+    } catch(e){ resolve(false); }
+  });
+}
+
+async function loadAll(){
+  db = await openDB();
+
+  var lsTs      = parseInt(localStorage.getItem(STORAGE_TS) || '0', 10);
+  var lsHasData = localStorage.getItem(STORAGE_DRUGS) !== null;
+  var idbTs     = 0;
+
+  if(db){
+    var metaTs = await idbGet('meta');
+    idbTs = typeof metaTs === 'number' ? metaTs : 0;
+  }
+  var idbHasData = idbTs > 0;
+
+  if(!lsHasData && !idbHasData){
+    categories = Object.assign({}, defaultCategories);
+    drugs = defaultDrugs.map(migrateFsrs).filter(Boolean);
+    return;
+  }
+
+  var useLocal = lsHasData && (!idbHasData || lsTs >= idbTs);
+
+  if(useLocal){
+    try { categories = JSON.parse(localStorage.getItem(STORAGE_CATS) || '{}'); }
+    catch(e){ categories = Object.assign({}, defaultCategories); }
+    try { drugs = JSON.parse(localStorage.getItem(STORAGE_DRUGS) || '[]').map(migrateFsrs).filter(Boolean); }
+    catch(e){ drugs = []; }
+  } else {
+    categories = (await idbGet('cats')) || Object.assign({}, defaultCategories);
+    var drgs = await idbGet('drugs');
+    drugs = Array.isArray(drgs) ? drgs.map(migrateFsrs).filter(Boolean) : [];
+  }
+
+  if(!categories || typeof categories !== 'object' || !Object.keys(categories).length){
+    categories = Object.assign({}, defaultCategories);
+  }
+}
+
+function persist(){
+  var now = Date.now();
+  try {
+    localStorage.setItem(STORAGE_CATS, JSON.stringify(categories));
+    localStorage.setItem(STORAGE_DRUGS, JSON.stringify(drugs));
+    localStorage.setItem(STORAGE_TS, String(now));
+  } catch(e){
+    console.warn('localStorage quota exceeded — relying on IndexedDB');
+  }
+  if(db){
+    idbSet('meta', now).catch(function(){});
+    idbSet('cats', categories).catch(function(){});
+    idbSet('drugs', drugs).catch(function(){});
+  }
+}
+
 /* ======================= NAVIGATION ======================= */
 function showPage(p){
   document.querySelectorAll('.page').forEach(function(x){ x.classList.remove('active'); });
@@ -1076,19 +1322,6 @@ function showPage(p){
   if(p === 'search') renderDrugLibrary();
   if(p === 'study') initStudy();
   if(p === 'quiz') initQuizPage();
-}
-
-/* ======================= SIDEBAR STATS ======================= */
-function updateSidebarStats(){
-  var d = dueCount(), l = learnedCount(), t = drugs.length;
-  var sd = document.getElementById('sideDue'); if(sd) sd.textContent = d;
-  var sl = document.getElementById('sideLearned'); if(sl) sl.textContent = l;
-  var st = document.getElementById('sideTotal'); if(st) st.textContent = t;
-  var badge = document.getElementById('navDueBadge');
-  if(badge){
-    badge.textContent = d;
-    badge.className = 'nav-badge' + (d > 0 ? '' : ' green');
-  }
 }
 
 /* ======================= LIBRARY ======================= */
@@ -1151,48 +1384,87 @@ function renderCatsStrip(){
   el.innerHTML = html || '<div class="small muted">لا توجد مجموعات.</div>';
 }
 
+var libraryObserver = null;
+
 function renderDrugLibrary(){
-  var input = document.getElementById('searchInput');
-  var q = (input ? input.value : '').toLowerCase().trim();
-  var catSel = document.getElementById('catFilter');
-  var cat = catSel ? catSel.value : 'all';
+  var searchEl = document.getElementById('searchInput');
+  var catEl    = document.getElementById('catFilter');
+  var q        = (searchEl ? searchEl.value : '').toLowerCase().trim();
+  var cat      = catEl ? catEl.value : 'all';
+  filterDrugs(q, cat, applyLibraryResults);
+}
 
-  var list = drugs.filter(function(d){
-    var hay = (JSON.stringify(d) || '').toLowerCase();
-    return (!q || hay.indexOf(q) !== -1) && (cat === 'all' || d.cat === cat);
-  });
-  currentFilteredList = list;
+function applyLibraryResults(results){
+  libraryState.filtered = results;
+  libraryState.rendered = 0;
+  currentFilteredList = results;
 
-  var cEl = document.getElementById('drugsCount');
-  if(cEl) cEl.textContent = list.length + ' دواء';
+  var countEl = document.getElementById('drugsCount');
+  if(countEl) countEl.textContent = results.length + ' دواء';
 
   var grid = document.getElementById('drugLibrary');
   if(!grid) return;
 
-  if(list.length === 0){
-    if(drugs.length === 0){
-      grid.innerHTML = '<div class="empty" style="grid-column:1/-1">' +
-        '<div class="empty-icon">💊</div>' +
-        '<div style="font-size:16px;color:#fff;font-weight:700;margin-bottom:6px">لا توجد أدوية بعد</div>' +
-        '<div>أضف أول دواء، أو استعد الأدوية الافتراضية.</div>' +
-        '<div class="empty-actions">' +
-          '<button class="primary" onclick="openDrugModal()">＋ إضافة دواء</button>' +
-          '<button class="ghost" onclick="restoreDefaults()">↺ استعادة الافتراضية</button>' +
-        '</div>' +
-      '</div>';
-    } else {
-      grid.innerHTML = '<div class="empty" style="grid-column:1/-1">لا توجد نتائج. جرّب كلمة بحث أخرى أو غيّر المجموعة.</div>';
-    }
+  if(!libraryObserver && typeof IntersectionObserver !== 'undefined'){
+    libraryObserver = new IntersectionObserver(function(entries){
+      for(var i = 0; i < entries.length; i++){
+        if(entries[i].isIntersecting){ appendLibraryBatch(); break; }
+      }
+    }, { rootMargin: '500px 0px' });
+  }
+  if(libraryObserver) libraryObserver.disconnect();
+
+  grid.innerHTML = '';
+
+  if(results.length === 0){
+    grid.innerHTML = drugs.length === 0
+      ? '<div class="empty" style="grid-column:1/-1">' +
+          '<div class="empty-icon">💊</div>' +
+          '<div style="font-size:16px;color:#fff;font-weight:700;margin-bottom:6px">لا توجد أدوية بعد</div>' +
+          '<div>أضف أول دواء، أو استعد الأدوية الافتراضية.</div>' +
+          '<div class="empty-actions">' +
+            '<button class="primary" onclick="openDrugModal()">＋ إضافة دواء</button>' +
+            '<button class="ghost" onclick="restoreDefaults()">↺ استعادة الافتراضية</button>' +
+          '</div></div>'
+      : '<div class="empty" style="grid-column:1/-1">لا توجد نتائج. جرّب كلمة بحث أخرى أو غيّر المجموعة.</div>';
     return;
   }
 
-  grid.innerHTML = list.map(drugCard).join('');
+  appendLibraryBatch();
+}
+
+function appendLibraryBatch(){
+  var grid = document.getElementById('drugLibrary');
+  if(!grid) return;
+  var total = libraryState.filtered.length;
+  var start = libraryState.rendered;
+  var end   = Math.min(start + libraryState.pageSize, total);
+  if(start >= end) return;
+
+  var old = grid.querySelector('.lib-sentinel');
+  if(old){
+    if(libraryObserver) libraryObserver.unobserve(old);
+    old.remove();
+  }
+
+  var html = '';
+  for(var i = start; i < end; i++) html += drugCard(libraryState.filtered[i]);
+  grid.insertAdjacentHTML('beforeend', html);
+  libraryState.rendered = end;
+
+  if(end < total){
+    var s = document.createElement('div');
+    s.className = 'lib-sentinel';
+    s.setAttribute('aria-hidden', 'true');
+    grid.appendChild(s);
+    if(libraryObserver) libraryObserver.observe(s);
+  }
 }
 
 function globalSearch(v){
   var input = document.getElementById('searchInput');
   if(input) input.value = v;
-  renderDrugLibrary();
+  debouncedRenderLibrary();
 }
 
 function filterByCat(cat){
@@ -1208,6 +1480,7 @@ function restoreDefaults(){
   if(!confirm('استعادة الأدوية الافتراضية؟ سيتم استبدال القائمة الحالية.')) return;
   drugs = defaultDrugs.map(migrateFsrs).filter(Boolean);
   persist();
+  rebuildSearchIndex(false);
   renderCatsStrip();
   renderDrugLibrary();
   updateSidebarStats();
@@ -1278,10 +1551,7 @@ function renderDetail(d, tab){
       '<span class="nav-ar">' + (prev ? esc(prev.ar) : 'بداية القائمة') + '</span>' +
       '<span class="nav-arrow">→</span>' +
     '</button>' +
-    '<div class="nav-center">' +
-      '<b>' + (idx+1) + ' / ' + (list.length || 1) + '</b>' +
-      '<span>ضمن القائمة الحالية</span>' +
-    '</div>' +
+    '<div class="nav-center"><b>' + (idx+1) + ' / ' + (list.length || 1) + '</b><span>ضمن القائمة الحالية</span></div>' +
     '<button class="nav-drug next ' + (next ? '' : 'disabled') + '" ' +
       (next ? 'onclick="navigateDrug(\'' + esc(next.id) + '\')"' : '') + '>' +
       '<span class="nav-label">الدواء التالي</span>' +
@@ -1392,16 +1662,16 @@ function initStudy(){
 }
 
 function renderStudyPage(){
-  var due = dueCount(), learned = learnedCount(), total = drugs.length;
-  var sd = document.getElementById('studyDue'); if(sd) sd.textContent = due;
-  var sl = document.getElementById('studyLearned'); if(sl) sl.textContent = learned;
-  var st = document.getElementById('studyTotal'); if(st) st.textContent = total;
+  var c = getCounts();
+  var sd = document.getElementById('studyDue'); if(sd) sd.textContent = c.due;
+  var sl = document.getElementById('studyLearned'); if(sl) sl.textContent = c.learned;
+  var st = document.getElementById('studyTotal'); if(st) st.textContent = c.total;
   updateSidebarStats();
 
   var root = document.getElementById('studyMain');
   if(!root) return;
 
-  if(total === 0){
+  if(c.total === 0){
     root.innerHTML = '<div class="study-empty">' +
       '<div class="empty-icon">📚</div>' +
       '<h4>لا توجد أدوية بعد</h4>' +
@@ -1463,9 +1733,7 @@ function renderStudyPage(){
     backHtml += '<div class="back-block warn"><h5>Contraindications / موانع الاستعمال</h5><ul>' +
       d.contra.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></div>';
   }
-  if(!backHtml){
-    backHtml = '<div class="back-block"><p class="muted">لا توجد تفاصيل إضافية.</p></div>';
-  }
+  if(!backHtml) backHtml = '<div class="back-block"><p class="muted">لا توجد تفاصيل إضافية.</p></div>';
 
   root.innerHTML =
     '<div class="card-perspective" onclick="flipStudyCard()">' +
@@ -1515,7 +1783,6 @@ function skipStudyCard(){
   studyIndex = (studyIndex + 1) % studyQueue.length;
   renderStudyPage();
 }
-
 function prevStudyCard(){
   if(studyQueue.length === 0) return;
   studyIndex = (studyIndex - 1 + studyQueue.length) % studyQueue.length;
@@ -1529,6 +1796,7 @@ function resetStudyCard(){
   currentStudyDrug.factor = 1.0;
   currentStudyDrug.nextReview = 0;
   persist();
+  invalidateCounts();
   toast('تم تصفير البطاقة ✓');
   initStudy();
 }
@@ -1551,6 +1819,7 @@ function processFSRSResponse(chosenLevel, event){
   var finalDays = calculateDynamicInterval(chosenLevel, card.factor);
   card.nextReview = Date.now() + finalDays * 86400000;
   persist();
+  invalidateCounts();
 
   if(studyFilter === 'due'){
     var idx = -1;
@@ -1593,7 +1862,7 @@ function speak(text, lang){
   } catch(e){ console.error(e); }
 }
 
-/* ======================= QUIZ ENGINE ======================= */
+/* ======================= QUIZ ======================= */
 function initQuizPage(){
   renderFilters();
   setQuizPhase(quizState.phase);
@@ -1609,25 +1878,20 @@ function setQuizPhase(phase){
   if(res) res.style.display = phase === 'result' ? 'block' : 'none';
 }
 
-// ----- Generate questions from drug uses -----
 function generateDrugQuestions(count, catFilter){
   var candidates = drugs.filter(function(d){
     return d.uses && d.uses.length > 0 && (catFilter === 'all' || d.cat === catFilter);
   });
   if(candidates.length < 4) return null;
 
-  // Build valid pairs (drug + use) that have >= 3 distractors not sharing the use
   var pairs = [];
   candidates.forEach(function(d){
     d.uses.forEach(function(use){
       var validDistractors = candidates.filter(function(other){
         if(other.id === d.id) return false;
-        // Distractor must NOT have the same use (to ensure only one correct answer)
         return !other.uses.some(function(u){ return u === use; });
       });
-      if(validDistractors.length >= 3){
-        pairs.push({ drug: d, use: use, distractors: validDistractors });
-      }
+      if(validDistractors.length >= 3) pairs.push({ drug: d, use: use, distractors: validDistractors });
     });
   });
   if(pairs.length === 0) return null;
@@ -1638,13 +1902,8 @@ function generateDrugQuestions(count, catFilter){
   pairs.forEach(function(pair){
     var distractors = shuffleArray(pair.distractors).slice(0, 3);
     var correctText = pair.drug.generic + ' (' + pair.drug.ar + ')';
-    var allOptions = [correctText].concat(distractors.map(function(d){
-      return d.generic + ' (' + d.ar + ')';
-    }));
-    // Shuffle while tracking the correct index
-    var indexed = allOptions.map(function(text, i){
-      return { text: text, isCorrect: i === 0 };
-    });
+    var allOptions = [correctText].concat(distractors.map(function(d){ return d.generic + ' (' + d.ar + ')'; }));
+    var indexed = allOptions.map(function(text, i){ return { text: text, isCorrect: i === 0 }; });
     indexed = shuffleArray(indexed);
     var correctIdx = 0;
     var finalOpts = indexed.map(function(item, i){
@@ -1652,7 +1911,6 @@ function generateDrugQuestions(count, catFilter){
       return item.text;
     });
 
-    // Format use for question display: Arabic (English)
     var parts = pair.use.split(' — ');
     var formattedUse;
     if(parts.length === 2){
@@ -1687,11 +1945,8 @@ function startDrugQuiz(){
     var candidates = drugs.filter(function(d){
       return d.uses && d.uses.length > 0 && (catFilter === 'all' || d.cat === catFilter);
     });
-    if(candidates.length < 4){
-      toast('تحتاج إلى 4 أدوية على الأقل لها استطبابات في هذا النطاق');
-    } else {
-      toast('لا توجد استطبابات فريدة كافية لتوليد أسئلة دقيقة. أضف استطبابات متنوعة.');
-    }
+    if(candidates.length < 4) toast('تحتاج إلى 4 أدوية على الأقل لها استطبابات في هذا النطاق');
+    else toast('لا توجد استطبابات فريدة كافية لتوليد أسئلة دقيقة.');
     return;
   }
 
@@ -1700,26 +1955,18 @@ function startDrugQuiz(){
   quizState.settings.timerSeconds = timer;
   quizState.isActive = true;
   quizState.source = 'library';
-
   setQuizPhase('playing');
   renderQuizQuestion();
 }
 
-// ----- Custom JSON quiz -----
 function loadCustomQuizFile(file){
   if(!file) return;
-  if(!/\.json$/i.test(file.name) && file.type !== 'application/json'){
-    toast('اختر ملف JSON صالحًا');
-    return;
-  }
+  if(!/\.json$/i.test(file.name) && file.type !== 'application/json'){ toast('اختر ملف JSON صالحًا'); return; }
   var reader = new FileReader();
   reader.onload = function(e){
     try {
       var data = JSON.parse(e.target.result);
-      if(!Array.isArray(data) || data.length === 0){
-        throw new Error('يجب أن يكون ملف JSON مصفوفة أسئلة');
-      }
-      // Normalize
+      if(!Array.isArray(data) || data.length === 0) throw new Error('يجب أن يكون ملف JSON مصفوفة أسئلة');
       var normalized = data.map(function(q, i){
         if(!q.question || !Array.isArray(q.options) || typeof q.correctIndex !== 'number'){
           throw new Error('سؤال رقم ' + (i+1) + ' غير صالح');
@@ -1733,9 +1980,7 @@ function loadCustomQuizFile(file){
         };
       });
       startCustomQuiz(normalized);
-    } catch(err){
-      toast('خطأ في الملف: ' + err.message);
-    }
+    } catch(err){ toast('خطأ في الملف: ' + err.message); }
   };
   reader.readAsText(file);
 }
@@ -1758,15 +2003,13 @@ function startCustomQuiz(questions){
   renderQuizQuestion();
 }
 
-// ----- Render & navigate -----
 function renderQuizQuestion(){
   stopQuizTimer();
   var q = quizState.questions[quizState.currentIndex];
   if(!q) return;
 
-  var progress = ((quizState.currentIndex + 1) / quizState.questions.length) * 100;
   var pFill = document.getElementById('quizProgressFill');
-  if(pFill) pFill.style.width = progress + '%';
+  if(pFill) pFill.style.width = ((quizState.currentIndex + 1) / quizState.questions.length * 100) + '%';
 
   var qNum = document.getElementById('quizQuestionNum');
   if(qNum) qNum.textContent = 'السؤال ' + (quizState.currentIndex + 1) + ' من ' + quizState.questions.length;
@@ -1792,10 +2035,7 @@ function renderQuizQuestion(){
   var explEl = document.getElementById('quizExplanation');
   if(explEl){ explEl.style.display = 'none'; explEl.innerHTML = ''; }
 
-  // If already answered, show the answer state
-  if(q.userAnswer !== undefined && q.userAnswer !== null){
-    showQuizAnswer();
-  }
+  if(q.userAnswer !== undefined && q.userAnswer !== null) showQuizAnswer();
 
   updateQuizScore();
   updateQuizNavButtons();
@@ -1819,10 +2059,8 @@ function answerQuiz(idx){
   var q = quizState.questions[quizState.currentIndex];
   if(!q) return;
   if(q.userAnswer !== undefined && q.userAnswer !== null) return;
-
   q.userAnswer = idx;
   q.isCorrect = (idx === q.correctIndex);
-
   stopQuizTimer();
   showQuizAnswer();
   updateQuizScore();
@@ -1832,32 +2070,20 @@ function answerQuiz(idx){
 function showQuizAnswer(){
   var q = quizState.questions[quizState.currentIndex];
   if(!q) return;
-  var options = document.querySelectorAll('.quiz-option');
-  options.forEach(function(el, idx){
+  document.querySelectorAll('.quiz-option').forEach(function(el, idx){
     el.disabled = true;
     var status = el.querySelector('.opt-status');
-    if(idx === q.correctIndex){
-      el.classList.add('correct');
-      if(status) status.textContent = '✓';
-    } else if(idx === q.userAnswer){
-      el.classList.add('wrong');
-      if(status) status.textContent = '✗';
-    }
+    if(idx === q.correctIndex){ el.classList.add('correct'); if(status) status.textContent = '✓'; }
+    else if(idx === q.userAnswer){ el.classList.add('wrong'); if(status) status.textContent = '✗'; }
   });
 
   var explEl = document.getElementById('quizExplanation');
   if(explEl){
     var html = '';
-    if(q.isCorrect){
-      html = '<strong>✅ إجابة صحيحة!</strong>';
-    } else if(q.userAnswer === -1){
-      html = '<strong>⏰ انتهى الوقت!</strong> الإجابة الصحيحة: ' + esc(q.options[q.correctIndex]);
-    } else {
-      html = '<strong>❌ إجابة خاطئة.</strong> الإجابة الصحيحة: ' + esc(q.options[q.correctIndex]);
-    }
-    if(q.explanation){
-      html += '<div style="margin-top:6px;color:#aab5cd">📝 ' + esc(q.explanation) + '</div>';
-    }
+    if(q.isCorrect) html = '<strong>✅ إجابة صحيحة!</strong>';
+    else if(q.userAnswer === -1) html = '<strong>⏰ انتهى الوقت!</strong> الإجابة الصحيحة: ' + esc(q.options[q.correctIndex]);
+    else html = '<strong>❌ إجابة خاطئة.</strong> الإجابة الصحيحة: ' + esc(q.options[q.correctIndex]);
+    if(q.explanation) html += '<div style="margin-top:6px;color:#aab5cd">📝 ' + esc(q.explanation) + '</div>';
     explEl.innerHTML = html;
     explEl.style.display = 'block';
   }
@@ -1867,8 +2093,7 @@ function updateQuizScore(){
   var correct = 0, wrong = 0;
   quizState.questions.forEach(function(q){
     if(q.userAnswer === undefined || q.userAnswer === null) return;
-    if(q.isCorrect) correct++;
-    else wrong++;
+    if(q.isCorrect) correct++; else wrong++;
   });
   var sc = document.getElementById('quizScoreCorrect'); if(sc) sc.textContent = correct;
   var sw = document.getElementById('quizScoreWrong'); if(sw) sw.textContent = wrong;
@@ -1878,42 +2103,31 @@ function nextQuizQuestion(){
   var q = quizState.questions[quizState.currentIndex];
   if(!q) return;
   if(q.userAnswer === undefined || q.userAnswer === null) return;
-
   if(quizState.currentIndex < quizState.questions.length - 1){
     quizState.currentIndex++;
     renderQuizQuestion();
-  } else {
-    finishQuiz();
-  }
+  } else finishQuiz();
 }
 
 function prevQuizQuestion(){
-  if(quizState.currentIndex > 0){
-    quizState.currentIndex--;
-    renderQuizQuestion();
-  }
+  if(quizState.currentIndex > 0){ quizState.currentIndex--; renderQuizQuestion(); }
 }
 
-// ----- Timer -----
 function startQuizTimer(){
   stopQuizTimer();
   var q = quizState.questions[quizState.currentIndex];
   if(!q) return;
-  if(q.userAnswer !== undefined && q.userAnswer !== null) return; // already answered
+  if(q.userAnswer !== undefined && q.userAnswer !== null) return;
   var seconds = quizState.settings.timerSeconds;
   var timerEl = document.getElementById('quizTimer');
   if(!timerEl) return;
-  if(seconds <= 0){
-    timerEl.style.display = 'none';
-    return;
-  }
+  if(seconds <= 0){ timerEl.style.display = 'none'; return; }
   timerEl.style.display = 'inline-block';
   quizState.timeLeft = seconds;
   timerEl.textContent = '⏳ ' + seconds + ' ث';
   timerEl.classList.remove('warning');
 
   quizState.timerInterval = setInterval(function(){
-    // Pause ticking if not on quiz page
     if(!document.getElementById('page-quiz').classList.contains('active')) return;
     quizState.timeLeft--;
     timerEl.textContent = '⏳ ' + quizState.timeLeft + ' ث';
@@ -1933,20 +2147,13 @@ function startQuizTimer(){
 }
 
 function stopQuizTimer(){
-  if(quizState.timerInterval){
-    clearInterval(quizState.timerInterval);
-    quizState.timerInterval = null;
-  }
+  if(quizState.timerInterval){ clearInterval(quizState.timerInterval); quizState.timerInterval = null; }
 }
 
-// ----- Finish & result -----
 function finishQuiz(){
   stopQuizTimer();
   var correct = 0, wrong = 0;
-  quizState.questions.forEach(function(q){
-    if(q.isCorrect) correct++;
-    else wrong++;
-  });
+  quizState.questions.forEach(function(q){ if(q.isCorrect) correct++; else wrong++; });
   var total = quizState.questions.length;
   var pct = total ? Math.round((correct / total) * 100) : 0;
 
@@ -1957,7 +2164,6 @@ function finishQuiz(){
   var rwBtn = document.getElementById('quizRetryWrongBtn');
   if(rwBtn) rwBtn.style.display = wrong > 0 ? 'inline-flex' : 'none';
 
-  // Hide review by default
   var rcContainer = document.getElementById('quizReviewContainer');
   if(rcContainer) rcContainer.style.display = 'none';
 
@@ -1979,22 +2185,16 @@ function resetQuiz(){
   setQuizPhase('setup');
 }
 
-function confirmExitQuiz(){
-  if(confirm('إلغاء الاختبار والعودة للإعداد؟')) resetQuiz();
-}
+function confirmExitQuiz(){ if(confirm('إلغاء الاختبار والعودة للإعداد؟')) resetQuiz(); }
 
 function retryWrongQuiz(){
   var wrongQs = quizState.questions.filter(function(q){ return !q.isCorrect; });
   if(wrongQs.length === 0){ toast('لا توجد أسئلة خاطئة! 🎉'); return; }
   var fresh = wrongQs.map(function(q){
     return {
-      question: q.question,
-      options: q.options,
-      correctIndex: q.correctIndex,
-      explanation: q.explanation,
-      isHtmlQuestion: q.isHtmlQuestion,
-      userAnswer: undefined,
-      isCorrect: undefined
+      question: q.question, options: q.options, correctIndex: q.correctIndex,
+      explanation: q.explanation, isHtmlQuestion: q.isHtmlQuestion,
+      userAnswer: undefined, isCorrect: undefined
     };
   });
   quizState.questions = fresh;
@@ -2025,7 +2225,7 @@ function showQuizReview(){
   container.style.display = 'block';
 }
 
-/* ======================= CRUD DRUGS ======================= */
+/* ======================= CRUD ======================= */
 function openDrugModal(){
   var t = document.getElementById('drugModalTitle'); if(t) t.textContent = 'إضافة دواء جديد';
   var e = document.getElementById('editDrugId'); if(e) e.value = '';
@@ -2054,10 +2254,7 @@ function editDrug(id){
   document.getElementById('drugModal').classList.add('open');
 }
 
-function closeModal(id){
-  var el = document.getElementById(id);
-  if(el) el.classList.remove('open');
-}
+function closeModal(id){ var el = document.getElementById(id); if(el) el.classList.remove('open'); }
 
 function splitLines(id){
   var el = document.getElementById(id);
@@ -2090,20 +2287,17 @@ function saveDrug(e){
 
   var idx = -1;
   for(var j = 0; j < drugs.length; j++){ if(drugs[j].id === id){ idx = j; break; } }
-  if(idx >= 0) drugs[idx] = d;
-  else drugs.push(d);
+  if(idx >= 0) drugs[idx] = d; else drugs.push(d);
 
   persist();
+  rebuildSearchIndex(false);
   closeModal('drugModal');
   renderFilters();
   renderCatsStrip();
   renderDrugLibrary();
   updateSidebarStats();
 
-  if(currentDrug && currentDrug.id === id){
-    currentDrug = d;
-    renderDetail(d, 'summary');
-  }
+  if(currentDrug && currentDrug.id === id){ currentDrug = d; renderDetail(d, 'summary'); }
   toast('تم حفظ الدواء ✓');
 }
 
@@ -2112,6 +2306,7 @@ function deleteDrug(id){
   drugs = drugs.filter(function(x){ return x.id !== id; });
   if(currentStudyDrug && currentStudyDrug.id === id) currentStudyDrug = null;
   persist();
+  rebuildSearchIndex(false);
   renderCatsStrip();
   renderDrugLibrary();
   updateSidebarStats();
@@ -2119,7 +2314,6 @@ function deleteDrug(id){
   toast('تم حذف الدواء');
 }
 
-/* ======================= CRUD CATEGORIES ======================= */
 function openCatModal(key){
   var title = document.getElementById('catModalTitle');
   if(title) title.textContent = key ? 'تعديل مجموعة دوائية' : 'إضافة مجموعة دوائية';
@@ -2148,6 +2342,7 @@ function saveCategory(e){
   }
   categories[newKey] = arName;
   persist();
+  rebuildSearchIndex(false);
   renderFilters();
   renderCatsStrip();
   renderDrugLibrary();
@@ -2159,6 +2354,7 @@ function deleteCategory(key){
   if(!confirm('حذف المجموعة "' + categories[key] + '"؟ لن يتم حذف الأدوية التابعة لها.')) return;
   delete categories[key];
   persist();
+  rebuildSearchIndex(false);
   renderFilters();
   renderCatsStrip();
   renderDrugLibrary();
@@ -2296,18 +2492,13 @@ function parseImportedPayload(parsed){
   } else if(parsed && typeof parsed === 'object'){
     incoming = Array.isArray(parsed.drugs) ? parsed.drugs : (parsed.drug ? [parsed.drug] : []);
     incomingCats = (parsed.categories && typeof parsed.categories === 'object') ? parsed.categories : {};
-  } else {
-    throw new Error('بنية الملف غير مدعومة');
-  }
+  } else throw new Error('بنية الملف غير مدعومة');
   return {incoming: incoming.map(normalizeDrug), incomingCats: incomingCats};
 }
 
 function handleImportFile(file){
   if(!file) return;
-  if(!/\.json$/i.test(file.name) && file.type !== 'application/json'){
-    toast('اختر ملف JSON صالحًا');
-    return;
-  }
+  if(!/\.json$/i.test(file.name) && file.type !== 'application/json'){ toast('اختر ملف JSON صالحًا'); return; }
   var reader = new FileReader();
   reader.onload = function(ev){
     try {
@@ -2334,10 +2525,7 @@ function handleImportFile(file){
           '</div>' +
         '</div>';
       prev.classList.remove('hidden');
-    } catch(err){
-      pendingImport = null;
-      toast('تعذر قراءة الملف: ' + err.message);
-    }
+    } catch(err){ pendingImport = null; toast('تعذر قراءة الملف: ' + err.message); }
   };
   reader.readAsText(file);
 }
@@ -2355,6 +2543,7 @@ function commitImport(){
     if(!categories[k]) categories[k] = pendingImport.incomingCats[k] || k;
   });
   persist();
+  rebuildSearchIndex(true);
   renderFilters();
   renderCatsStrip();
   renderDrugLibrary();
@@ -2387,6 +2576,7 @@ function replaceMatchingImport(){
   });
 
   persist();
+  rebuildSearchIndex(true);
   renderFilters();
   renderCatsStrip();
   renderDrugLibrary();
@@ -2409,46 +2599,26 @@ function handleKeys(e){
   var isStudy = pageStudy && pageStudy.classList.contains('active');
   var isDetail = pageDetail && pageDetail.classList.contains('active');
 
-  // Quiz shortcuts (only when playing)
   if(isQuiz && quizState.phase === 'playing'){
     var q = quizState.questions[quizState.currentIndex];
     if(!q) return;
 
     if(/^[a-dA-D]$/.test(e.key)){
       var idx = e.key.toLowerCase().charCodeAt(0) - 97;
-      if(q.options[idx] !== undefined && (q.userAnswer === undefined || q.userAnswer === null)){
-        e.preventDefault();
-        answerQuiz(idx);
-      }
+      if(q.options[idx] !== undefined && (q.userAnswer === undefined || q.userAnswer === null)){ e.preventDefault(); answerQuiz(idx); }
       return;
     }
     if(/^[1-4]$/.test(e.key)){
       var idx2 = parseInt(e.key, 10) - 1;
-      if(q.options[idx2] !== undefined && (q.userAnswer === undefined || q.userAnswer === null)){
-        e.preventDefault();
-        answerQuiz(idx2);
-      }
+      if(q.options[idx2] !== undefined && (q.userAnswer === undefined || q.userAnswer === null)){ e.preventDefault(); answerQuiz(idx2); }
       return;
     }
-    if(e.key === 'Enter' || e.key === 'ArrowLeft'){
-      e.preventDefault();
-      nextQuizQuestion();
-      return;
-    }
-    if(e.key === 'ArrowRight'){
-      e.preventDefault();
-      prevQuizQuestion();
-      return;
-    }
-    if(e.key === 'Escape'){
-      e.preventDefault();
-      confirmExitQuiz();
-      return;
-    }
-    return; // block other shortcuts during active quiz
+    if(e.key === 'Enter' || e.key === 'ArrowLeft'){ e.preventDefault(); nextQuizQuestion(); return; }
+    if(e.key === 'ArrowRight'){ e.preventDefault(); prevQuizQuestion(); return; }
+    if(e.key === 'Escape'){ e.preventDefault(); confirmExitQuiz(); return; }
+    return;
   }
 
-  // Study shortcuts
   if(isStudy){
     if(e.key === 'Enter'){ e.preventDefault(); flipStudyCard(); return; }
     if(/^[1-8]$/.test(e.key)){
@@ -2462,14 +2632,12 @@ function handleKeys(e){
     return;
   }
 
-  // Detail shortcuts
   if(isDetail){
     if(e.key === 'ArrowLeft'){ goNextDrug(); return; }
     if(e.key === 'ArrowRight'){ goPrevDrug(); return; }
     return;
   }
 
-  // Global shortcuts
   var k = e.key.toLowerCase();
   if(k === 's') showPage('search');
   if(k === 'r') showPage('study');
@@ -2477,28 +2645,30 @@ function handleKeys(e){
 }
 
 /* ======================= INIT ======================= */
-function init(){
-  loadAll();
+async function init(){
+  try {
+    await loadAll();
+  } catch(e){
+    console.error('Load failed:', e);
+    categories = Object.assign({}, defaultCategories);
+    drugs = defaultDrugs.map(migrateFsrs).filter(Boolean);
+  }
 
-  // Seed storage on first load
-  if(localStorage.getItem(STORAGE_DRUGS) === null) persist();
-  if(localStorage.getItem(STORAGE_CATS) === null) persist();
+  persist();
+  rebuildSearchIndex(false);
+  initFilterWorker();
 
-  // Nav
   document.querySelectorAll('.nav button').forEach(function(b){
     b.onclick = function(){ showPage(b.dataset.page); };
   });
 
-  // Compare selects
   var cmpA = document.getElementById('cmpA');
   var cmpB = document.getElementById('cmpB');
   if(cmpA) cmpA.onchange = renderCompareBody;
   if(cmpB) cmpB.onchange = renderCompareBody;
 
-  // Keyboard
   document.addEventListener('keydown', handleKeys);
 
-  // First render
   renderFilters();
   renderCatsStrip();
   renderDrugLibrary();
@@ -2507,7 +2677,7 @@ function init(){
 }
 
 if(document.readyState === 'loading'){
-  document.addEventListener('DOMContentLoaded', init);
+  document.addEventListener('DOMContentLoaded', function(){ init(); });
 } else {
   init();
 }
